@@ -18,8 +18,6 @@ class Player
 	MeshX playerModel;
 	//モデルに渡す行列を作成
 	D3DXMATRIXA16 mat_transform, mat_scale, mat_rotate;
-	//プレイヤーの座標
-	D3DXVECTOR3 playerPos;
 	//自キャラ生存フラグ
 	bool playerAliveFlag;
 	//移動スピード
@@ -31,7 +29,7 @@ class Player
 	//カメラの位置
 	D3DXVECTOR3 vEyePt;
 	//注視点はplayerPosです
-
+	D3DXVECTOR3 playerPos;
 	//上方向
 	D3DXVECTOR3 vUpVec;
 	//カメラ用の行列を作成

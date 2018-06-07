@@ -32,7 +32,7 @@ void Player::Initialize()
 	d3d.SetViewMatric(matView);
 
 	rad = 0.0f;
-	Speed = 0.1f;
+	Speed = 0.01f;
 }
 
 void Player::Update()
@@ -55,15 +55,20 @@ void Player::Draw()
 
 void Player::CameraControl()
 {
-	//カメラが回転するような挙動(原点で回転)
-	playerPos.x = vEyePt.x + range*sin(rad);
-	playerPos.y = vEyePt.y + 0.0f;
-	playerPos.z = vEyePt.z + range*cos(rad);
 
 	if (pDi->KeyState(DIK_UP))
 	{
-		vEyePt.x +=playerPos.x - vEyePt.x* Speed;
-		vEyePt.z +=playerPos.z - vEyePt.z* Speed;
+		vEyePt.x +=(playerPos.x - vEyePt.x)* Speed;
+		vEyePt.z +=(playerPos.z - vEyePt.z)* Speed;
+	}
+	if (pDi->KeyState(DIK_DOWN))
+	{
+		vEyePt.x -= (playerPos.x - vEyePt.x)* Speed;
+		vEyePt.z -= (playerPos.z - vEyePt.z)* Speed;
+	}
+	if (pDi->KeyState(DIK_DOWN))
+	{
+
 	}
 	if (pDi->KeyState(DIK_LEFTARROW))
 	{
@@ -74,9 +79,12 @@ void Player::CameraControl()
 		rad += 0.01f;
 	}
 
+	//カメラが回転するような挙動(原点で回転)
+	playerPos.x = vEyePt.x + range*sin(rad);
+	playerPos.y = vEyePt.y + 0.0f;
+	playerPos.z = vEyePt.z + range*cos(rad);
+
 	//カメラ情報更新
 	D3DXMatrixLookAtLH(&matView, &vEyePt, &playerPos, &vUpVec);
 	d3d.SetViewMatric(matView);
-
-	int a = 0;
 }
