@@ -77,4 +77,6 @@ void Player::CameraControl()
 	//ƒJƒƒ‰î•ñXV
 	D3DXMatrixLookAtLH(&matView, &vEyePt, &playerPos, &vUpVec);
 	d3d.SetViewMatric(matView);
+
+	int a = 0;
 }
