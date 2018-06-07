@@ -12,6 +12,8 @@
 #include"Vector2D.h"
 #include"wave.h"
 
+#include"Player.h"
+
 #define WindowWidth 640
 #define WindowHeight 480
 
@@ -39,6 +41,9 @@ private:
 
 	//キー操作用
 	DirectInput * pDi = DirectInput::GetInstansce();
+
+	//インスタンス作成群
+	Player player;
 
 public:
 	GameState();

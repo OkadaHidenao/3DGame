@@ -29,6 +29,8 @@ void GameState::Initialize()
 	overTexture.Load(_T("Graphic/2DOver.png"));
 	overTexture.SetDivide(1, 1);
 	overTexture.SetNum(0, 0);
+
+	player.Initialize();
 }
 
 void GameState::SetUpGame()
@@ -77,7 +79,7 @@ void GameState::GameTitle()
 void GameState::GameMain()
 {
 	//ÉÅÉCÉì
-
+	player.Update();
 }
 
 void GameState::GameClear()

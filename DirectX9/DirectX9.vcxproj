@@ -159,6 +159,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="MeshX.cpp" />
     <ClCompile Include="OrientedBoundingBox.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SoundBuffer.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="MeshX.h" />
     <ClInclude Include="OrientedBoundingBox.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="SoundBuffer.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />

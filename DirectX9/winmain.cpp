@@ -185,7 +185,7 @@ HRESULT MakeWindow
 	(0,						//ウィンドウ拡張スタイル
 		WC_BASIC,				//作りたいウィンドウクラス
 								//あらかじめ登録されたもの
-		_T("タイトル"),			//ウィンドウのタイトル
+		_T("はこにわシューター"),//ウィンドウのタイトル
 		WS_OVERLAPPEDWINDOW,	//ウィンドウのスタイル
 		CW_USEDEFAULT,			//位置x座標 デフォルトの値
 		CW_USEDEFAULT,			//位置y座標 デフォルトの値
@@ -317,6 +317,16 @@ int _stdcall WinMain
 	GameState gameState;
 	gameState.Initialize();
 
+	//メッシュインスタンスの作成
+	MeshX meshX;
+	meshX.Load("Mesh/pumpkin/pumpkin.x");
+	D3DXMATRIXA16 matIdentify;
+	D3DXMATRIXA16 matscale;
+	D3DXMATRIXA16 matrotate;
+	D3DXVECTOR3 pos;
+	pos.x = pos.y = 0.0f;
+	pos.z = 10.0f;
+
 	//メインループ
 	//メッセージループ
 	MSG msg = {};
@@ -359,6 +369,18 @@ int _stdcall WinMain
 
 				//描画
 				gameState.Update();
+
+				D3DXMatrixTranslation(&matIdentify, pos.x, pos.y, pos.z);	//座標
+				D3DXMatrixScaling(&matscale, 1.0f, 1.0f, 1.0f);								//拡大
+				D3DXMatrixRotationYawPitchRoll(&matrotate, 0.0f, 0.0f, 0.0f);				//回転	
+
+				meshX.Draw(matIdentify, matscale, matrotate);							//プレイヤー（自機）の描画
+
+				//メッシュの描画
+				//メッシュ描画の為のレンダーステート
+				d3d.SetRenderState(RENDERSTATE::RENDER_MESH_X);
+
+
 
 				//描画終了の合図
 				d3d.EndScene();
