@@ -40,8 +40,6 @@ class Player
 	//注視点の距離
 	const float range = 5.0f;
 
-	float movabs;
-
 	//キー操作用
 	DirectInput * pDi = DirectInput::GetInstansce();
 

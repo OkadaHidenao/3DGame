@@ -15,12 +15,12 @@ void Player::Initialize()
 	playerModel.Load(_T("Mesh/catsenkan.x"));
 	playerPos.x = 0.0f;
 	playerPos.y = 0.0f;
-	playerPos.z = 5.0f;
+	playerPos.z = 0.0f;
 	playerAliveFlag = true;
 
 	//カメラポジション設定
 	vEyePt.x = 0.0f;
-	vEyePt.y = 0.0f;
+	vEyePt.y = 3.0f;
 	vEyePt.z = 0.0f;
 	//上方向設定
 	vUpVec.x = 0.0f;
@@ -56,24 +56,24 @@ void Player::Draw()
 void Player::CameraControl()
 {
 
+	//上押したら
 	if (pDi->KeyState(DIK_UP))
 	{
 		vEyePt.x +=(playerPos.x - vEyePt.x)* Speed;
 		vEyePt.z +=(playerPos.z - vEyePt.z)* Speed;
 	}
+	//下押したら
 	if (pDi->KeyState(DIK_DOWN))
 	{
 		vEyePt.x -= (playerPos.x - vEyePt.x)* Speed;
 		vEyePt.z -= (playerPos.z - vEyePt.z)* Speed;
 	}
-	if (pDi->KeyState(DIK_DOWN))
-	{
-
-	}
+	//左押したら
 	if (pDi->KeyState(DIK_LEFTARROW))
 	{
 		rad -= 0.01f;
 	}
+	//右押したら
 	if (pDi->KeyState(DIK_RIGHTARROW))
 	{
 		rad += 0.01f;
@@ -81,7 +81,7 @@ void Player::CameraControl()
 
 	//カメラが回転するような挙動(原点で回転)
 	playerPos.x = vEyePt.x + range*sin(rad);
-	playerPos.y = vEyePt.y + 0.0f;
+	playerPos.y;
 	playerPos.z = vEyePt.z + range*cos(rad);
 
 	//カメラ情報更新
