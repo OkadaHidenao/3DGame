@@ -13,9 +13,9 @@ Player::~Player()
 void Player::Initialize()
 {
 	//カメラポジション設定
-	vEyePt.x = 0.0f;
+	vEyePt.x = 13.0f;
 	vEyePt.y = 0.0f;
-	vEyePt.z = 0.0f;
+	vEyePt.z = 13.0f;
 	//注視点設定
 	vLookatPt.x = 0.0f;
 	vLookatPt.y = 0.1f;
@@ -30,7 +30,7 @@ void Player::Initialize()
 	d3d.SetViewMatric(matView);
 
 	rad = 0.0f;
-	Speed = 0.02f;
+	Speed = 0.1f;
 }
 
 void Player::Update()
@@ -40,7 +40,6 @@ void Player::Update()
 
 void Player::Control()
 {
-
 	//上押したら
 	if (pDi->KeyState(DIK_UP))
 	{

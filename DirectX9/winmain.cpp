@@ -280,40 +280,14 @@ int _stdcall WinMain
 	}
 
 	//レンダーステートの設定  αブレンド
-	d3d.SetRenderState(RENDERSTATE::RENDER_ALPHABLEND);
-	d3d.SetProjectionMatrix();
-
-	{
-		//ワールド座標系の座標をカメラ中心の座標系に変換する行列
-		//カメラの位置と原点が重なるような座標系
-		//座標系の各軸の方向はカメラの向きによって変わる
-		D3DXMATRIXA16 mat;
-		D3DXVECTOR3 eye(0.0f, 0.0f, -10.0f);	//視点ワールド座標
-		D3DXVECTOR3 lookat(0.0f, 0.0f, 0.0f);	//注視点　eyeの位置から注視点を見るような回転を作る
-		D3DXVECTOR3 up(0.0f, 1.0f, 0.0f);		//ワールド座標上方向
-
-												//例として
-												//カメラが(0,0,300)の位置から
-												//(0,0,200)の位置にある3Dオブジェクトを見てる
-												// これをカメラの位置を(0,0,0)とみて
-												//3Dオブジェクトの位置を(0,0,-100)としてみる 
-												//(ただしカメラの回転によって(100,0,0)などそれぞれの軸の値はあらゆる値をとり得る)
-
-												//ビュー行列を作る　LH LeftHandの略 　(RH　はRightHand)
-		D3DXMatrixLookAtLH(&mat, &eye, &lookat, &up);
-		//3Dの座標系には右手座標系と左手座標系がありその左手座標系を使う
-		//両手をフレミングの左手の法則の様に広げて
-		//親指　人差し指　中指がそれぞれの軸のプラス方向としてみると
-		//右手と左手で親指の向きが違う(右手系と左手系のわかりやすい違い)
-
-		//ビュー行列設定
-		d3d.SetViewMatric(mat);
-	}
+	//d3d.SetRenderState(RENDERSTATE::RENDER_ALPHABLEND);
+	//d3d.SetProjectionMatrix();
 
 	//キー操作用
 	DirectInput * pDi = DirectInput::GetInstansce();
 	pDi->Init(hWnd);
 
+	//GameStateのインスタンスを作成
 	GameState gameState;
 	gameState.Initialize();
 

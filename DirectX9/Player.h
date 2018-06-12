@@ -14,17 +14,7 @@
 
 class Player
 {
-	//プレイヤーのモデル
-	MeshX playerModel;
-	//モデルに渡す行列を作成
-	D3DXMATRIXA16 mat_transform, mat_scale, mat_rotate;
-	//自キャラ生存フラグ
-	bool playerAliveFlag;
-	//プレイヤーのポジション
-	D3DXVECTOR3 playerPos;
-	//移動スピード
-	float Speed;
-
+private:
 
 	//カメラのインスタンスを作成
 	Camera camera;
@@ -41,11 +31,14 @@ class Player
 	float rad;
 	//注視点の距離
 	const float range = 5.0f;
+	//移動スピード
+	float Speed;
 
 	//キー操作用
 	DirectInput * pDi = DirectInput::GetInstansce();
 
 public:
+
 	Player();
 	~Player();
 
@@ -55,4 +48,7 @@ public:
 
 	//Direct3Dを管理するクラス(シングルトン)への参照を取得
 	Direct3D& d3d = Direct3D::GetInstance();
+
+	D3DXVECTOR3 cameraPos() { return vEyePt; }
+	D3DXVECTOR3 cameraAngle() { return vLookatPt; }
 };

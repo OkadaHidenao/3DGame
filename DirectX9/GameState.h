@@ -14,6 +14,7 @@
 
 #include"Player.h"
 #include"Bullet.h"
+#include"Map.h"
 
 #define WindowWidth 640
 #define WindowHeight 480
@@ -46,6 +47,7 @@ private:
 	//インスタンス作成群
 	Player player;
 	Bullet bullet;
+	Map *map;
 
 public:
 	GameState();

@@ -3,10 +3,12 @@
 GameState::GameState()
 {
 	//コンストラクタ
+	map = new Map;
 }
 GameState::~GameState()
 {
 	//デストラクタ
+	delete map;
 }
 
 void GameState::Initialize()
@@ -32,6 +34,7 @@ void GameState::Initialize()
 
 	player.Initialize();
 	bullet.Initialize();
+	map->Initialize();
 }
 
 void GameState::SetUpGame()
@@ -82,9 +85,10 @@ void GameState::GameMain()
 	//メイン
 	player.Update();
 	bullet.Draw();
+	map->Draw();
 
 	//弾の発射位置を設定
-	bullet.BulletSet(player.vEyePt, player.vLookatPt);
+	bullet.BulletSet(player.cameraPos(), player.cameraAngle());
 
 	//スペースキーを押したら
 	if (pDi->KeyJustPressed(DIK_SPACE))

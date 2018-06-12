@@ -12,29 +12,30 @@
 #include"Vector2D.h"
 #include"wave.h"
 
-#define Bullet_Speed 0.1f
-
-class Bullet
+class Map
 {
 private:
-	//弾のモデル
-	MeshX bulletModel;
-	//モデルに渡す行列を作成
+	//床のモデル
+	MeshX floorModel;
+	//床のモデルに渡す行列を作成
 	D3DXMATRIXA16 mat_transform, mat_scale, mat_rotate;
-	//弾の座標
-	D3DXVECTOR3 bulletPos;
-	//弾が発射される角度
-	D3DXVECTOR3 bulletShotAngle;
+	//床の座標(固定)
+	D3DXVECTOR3 floorPos;
+
+
+	//壁のモデル
+	MeshX wallModel;
+	//壁のモデルに渡す行列を作成
+	D3DXMATRIXA16 mat_wall_transform, mat_wall_scale, mat_wall_rotate;
+	//壁の座標
+	D3DXVECTOR3 wallPos[4];
 
 public:
-	Bullet();
-	~Bullet();
-
+	Map();
+	~Map();
 	void Initialize();
 	void Draw();
 
-	//弾の場所を決定
-	void BulletSet(D3DXVECTOR3 Pos, D3DXVECTOR3 Angle);
-	//弾を発射しているかのフラグ
-	bool BulletShotFlag;
+	//あたり判定用
+	void Hit();
 };

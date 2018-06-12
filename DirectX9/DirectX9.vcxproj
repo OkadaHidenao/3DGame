@@ -158,6 +158,7 @@
     <ClCompile Include="DirectInput.cpp" />
     <ClCompile Include="DirectSound.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="MeshX.cpp" />
     <ClCompile Include="OrientedBoundingBox.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="DirectInput.h" />
     <ClInclude Include="DirectSound.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="MeshX.h" />
     <ClInclude Include="OrientedBoundingBox.h" />
     <ClInclude Include="Player.h" />
