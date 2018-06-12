@@ -12,79 +12,64 @@ Player::~Player()
 
 void Player::Initialize()
 {
-	playerModel.Load(_T("Mesh/catsenkan.x"));
-	playerPos.x = 0.0f;
-	playerPos.y = 0.0f;
-	playerPos.z = 0.0f;
-	playerAliveFlag = true;
-
 	//カメラポジション設定
 	vEyePt.x = 0.0f;
-	vEyePt.y = 3.0f;
+	vEyePt.y = 0.0f;
 	vEyePt.z = 0.0f;
+	//注視点設定
+	vLookatPt.x = 0.0f;
+	vLookatPt.y = 0.1f;
+	vLookatPt.z = 0.0f;
 	//上方向設定
 	vUpVec.x = 0.0f;
 	vUpVec.y = 1.0f;
 	vUpVec.z = 0.0f;
 	//カメラ情報設定
-	D3DXMatrixLookAtLH(&matView, &vEyePt, &playerPos, &vUpVec);
+	D3DXMatrixLookAtLH(&matView, &vEyePt, &vLookatPt, &vUpVec);
 	//ビュー行列設定
 	d3d.SetViewMatric(matView);
 
 	rad = 0.0f;
-	Speed = 0.01f;
+	Speed = 0.02f;
 }
 
 void Player::Update()
 {
-	CameraControl();
-	Draw();
+	Control();
 }
 
-void Player::Draw()
-{
-	if (playerAliveFlag == true)
-	{
-		D3DXMatrixTranslation(&mat_transform, playerPos.x, playerPos.y, playerPos.z);	//座標
-		D3DXMatrixScaling(&mat_scale, 1.0f, 1.0f, 1.0f);								//拡大
-		D3DXMatrixRotationYawPitchRoll(&mat_rotate, rad, 0.0f, 0.0f);					//回転	
-
-		playerModel.Draw(mat_transform, mat_scale, mat_rotate);							//プレイヤー（自機）の描画
-	}
-}
-
-void Player::CameraControl()
+void Player::Control()
 {
 
 	//上押したら
 	if (pDi->KeyState(DIK_UP))
 	{
-		vEyePt.x +=(playerPos.x - vEyePt.x)* Speed;
-		vEyePt.z +=(playerPos.z - vEyePt.z)* Speed;
+		vEyePt.x += (vLookatPt.x - vEyePt.x)* Speed;
+		vEyePt.z += (vLookatPt.z - vEyePt.z)* Speed;
 	}
 	//下押したら
 	if (pDi->KeyState(DIK_DOWN))
 	{
-		vEyePt.x -= (playerPos.x - vEyePt.x)* Speed;
-		vEyePt.z -= (playerPos.z - vEyePt.z)* Speed;
+		vEyePt.x -= (vLookatPt.x - vEyePt.x)* Speed;
+		vEyePt.z -= (vLookatPt.z - vEyePt.z)* Speed;
 	}
 	//左押したら
 	if (pDi->KeyState(DIK_LEFTARROW))
 	{
-		rad -= 0.01f;
+		rad -= 0.02f;
 	}
 	//右押したら
 	if (pDi->KeyState(DIK_RIGHTARROW))
 	{
-		rad += 0.01f;
+		rad += 0.02f;
 	}
 
 	//カメラが回転するような挙動(原点で回転)
-	playerPos.x = vEyePt.x + range*sin(rad);
-	playerPos.y;
-	playerPos.z = vEyePt.z + range*cos(rad);
+	vLookatPt.x = vEyePt.x + range*sin(rad);
+	vLookatPt.y;
+	vLookatPt.z = vEyePt.z + range*cos(rad);
 
 	//カメラ情報更新
-	D3DXMatrixLookAtLH(&matView, &vEyePt, &playerPos, &vUpVec);
+	D3DXMatrixLookAtLH(&matView, &vEyePt, &vLookatPt, &vUpVec);
 	d3d.SetViewMatric(matView);
 }

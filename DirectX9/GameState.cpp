@@ -31,6 +31,7 @@ void GameState::Initialize()
 	overTexture.SetNum(0, 0);
 
 	player.Initialize();
+	bullet.Initialize();
 }
 
 void GameState::SetUpGame()
@@ -80,6 +81,23 @@ void GameState::GameMain()
 {
 	//メイン
 	player.Update();
+	bullet.Draw();
+
+	//弾の発射位置を設定
+	bullet.BulletSet(player.vEyePt, player.vLookatPt);
+
+	//スペースキーを押したら
+	if (pDi->KeyJustPressed(DIK_SPACE))
+	{
+		if (!bullet.BulletShotFlag)
+		{
+			bullet.BulletShotFlag = true;
+		}
+		else
+		{
+			bullet.BulletShotFlag = false;
+		}
+	}
 }
 
 void GameState::GameClear()

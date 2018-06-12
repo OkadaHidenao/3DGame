@@ -13,6 +13,7 @@
 #include"wave.h"
 
 #include"Player.h"
+#include"Bullet.h"
 
 #define WindowWidth 640
 #define WindowHeight 480
@@ -44,6 +45,7 @@ private:
 
 	//インスタンス作成群
 	Player player;
+	Bullet bullet;
 
 public:
 	GameState();
